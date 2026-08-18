@@ -1,10 +1,12 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { IoPaperPlaneOutline } from "react-icons/io5";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { SectionHeading } from "@/components/section-heading";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
@@ -56,27 +58,18 @@ export function Contact() {
   }
 
   return (
-    <section
-      id="contact"
-      aria-labelledby="contact-heading"
-      className="border-t border-border bg-secondary/40"
-    >
-      <div className="mx-auto max-w-2xl scroll-mt-16 px-6 py-20">
-        <h2
-          id="contact-heading"
-          className="font-mono text-sm font-semibold tracking-wide text-primary uppercase"
-        >
-          Contact
-        </h2>
-        <p className="mt-3 text-2xl font-medium text-balance text-foreground">
-          Have a role, project, or question in mind? I&apos;d like to hear about it.
-        </p>
+    <div className="max-w-2xl">
+      <SectionHeading>Contact</SectionHeading>
 
-        <form
-          onSubmit={handleSubmit}
-          noValidate
-          className="mt-10 flex flex-col gap-5"
-        >
+      <p className="mt-4 text-base text-muted-foreground">
+        Have a role, project, or question in mind? I&apos;d like to hear about it.
+      </p>
+
+      <form
+        onSubmit={handleSubmit}
+        noValidate
+        className="mt-8 flex flex-col gap-5"
+      >
           <div className="grid gap-5 sm:grid-cols-2">
             <div className="flex flex-col gap-2">
               <Label htmlFor="contact-name">Name</Label>
@@ -138,7 +131,13 @@ export function Contact() {
           </div>
 
           <div className="flex items-center gap-4">
-            <Button type="submit" size="lg" className="h-11 px-6" disabled={status === "submitting"}>
+            <Button
+              type="submit"
+              size="lg"
+              className="h-11 gap-2 px-6"
+              disabled={status === "submitting"}
+            >
+              <IoPaperPlaneOutline color="currentColor" size="16px" />
               {status === "submitting" ? "Sending..." : "Send message"}
             </Button>
             <p className="text-xs text-muted-foreground" role="status" aria-live="polite">
@@ -147,8 +146,7 @@ export function Contact() {
               {status === "error" && (errorMessage ?? "Something went wrong. Please try again.")}
             </p>
           </div>
-        </form>
-      </div>
-    </section>
+      </form>
+    </div>
   );
 }

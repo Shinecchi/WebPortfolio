@@ -1,41 +1,38 @@
 import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { skills } from "@/content/site-content";
 
+// Skills presentation for the Resume tab. Deliberately not the reference
+// site's horizontal progress-bar treatment - grouped badge cards instead,
+// consistent with the rest of the site's card/badge language.
 export function Skills() {
   return (
-    <section
-      id="skills"
-      aria-labelledby="skills-heading"
-      className="border-t border-border bg-secondary/40"
-    >
-      <div className="mx-auto max-w-5xl scroll-mt-16 px-6 py-20">
-        <h2
-          id="skills-heading"
-          className="font-mono text-sm font-semibold tracking-wide text-primary uppercase"
-        >
-          Skills
-        </h2>
-        <p className="mt-3 max-w-2xl text-2xl font-medium text-balance text-foreground">
-          Technologies and tools I use to ship products end-to-end.
-        </p>
-
-        <dl className="mt-10 grid gap-8 sm:grid-cols-2">
-          {skills.map((group) => (
-            <div key={group.category}>
-              <dt className="text-sm font-semibold text-foreground">
+    <div>
+      <h3 className="text-sm font-semibold tracking-wide text-foreground uppercase">
+        Skills
+      </h3>
+      <div className="mt-4 grid gap-4 sm:grid-cols-2">
+        {skills.map((group) => (
+          <Card key={group.category} className="gap-3 py-5">
+            <CardHeader className="px-5">
+              <h4 className="text-sm leading-none font-semibold text-foreground">
                 {group.category}
-              </dt>
-              <dd className="mt-3 flex flex-wrap gap-2">
+              </h4>
+            </CardHeader>
+            <CardContent className="px-5">
+              <ul className="flex flex-wrap gap-2">
                 {group.items.map((item) => (
-                  <Badge key={item} variant="outline" className="px-2.5 py-1">
-                    {item}
-                  </Badge>
+                  <li key={item}>
+                    <Badge variant="outline" className="px-2.5 py-1">
+                      {item}
+                    </Badge>
+                  </li>
                 ))}
-              </dd>
-            </div>
-          ))}
-        </dl>
+              </ul>
+            </CardContent>
+          </Card>
+        ))}
       </div>
-    </section>
+    </div>
   );
 }

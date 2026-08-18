@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useSyncExternalStore } from "react";
-import { Moon, Sun } from "lucide-react";
+import { IoMoonOutline, IoSunnyOutline } from "react-icons/io5";
 import { Button } from "@/components/ui/button";
 
 const STORAGE_KEY = "theme";
@@ -44,7 +44,11 @@ export function ThemeToggle() {
       aria-label={mounted ? (isDark ? "Switch to light theme" : "Switch to dark theme") : "Toggle theme"}
       onClick={toggle}
     >
-      {mounted && isDark ? <Sun aria-hidden="true" /> : <Moon aria-hidden="true" />}
+      {mounted && isDark ? (
+        <IoSunnyOutline color="currentColor" />
+      ) : (
+        <IoMoonOutline color="currentColor" />
+      )}
     </Button>
   );
 }

@@ -1,41 +1,58 @@
-import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { bioSummary, personal } from "@/content/site-content";
+import {
+  IoCodeSlashOutline,
+  IoDesktopOutline,
+  IoServerOutline,
+  IoBugOutline,
+} from "react-icons/io5";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { IconBox } from "@/components/icon-box";
+import { services, type Service } from "@/content/site-content";
 
-export function Hero() {
+// Matches each service by title to an icon, mirroring the reference vCard
+// template's per-service-item icon (it uses a static SVG asset per item;
+// we use an icon component instead, consistent with the rest of the site's
+// react-icons/io5 usage).
+const serviceIcons: Record<string, React.ComponentType<{ color?: string; size?: string }>> = {
+  "Full-Stack Development": IoCodeSlashOutline,
+  "Frontend Engineering": IoDesktopOutline,
+  "Backend & APIs": IoServerOutline,
+  "Codebase Triage": IoBugOutline,
+};
+
+// "What I do" service blurbs - shown on the About tab. File kept at its
+// original path (this used to be the full-viewport hero); the standalone
+// hero concept doesn't fit the sidebar+tabs layout since identity already
+// lives in the persistent sidebar.
+export function Services() {
   return (
-    <section
-      id="top"
-      aria-label="Introduction"
-      className="mx-auto flex min-h-[calc(100svh-4rem)] max-w-5xl flex-col justify-center gap-8 px-6 py-20"
-    >
-      <p className="font-mono text-sm font-medium tracking-wide text-primary">
-        Hi, I&apos;m {personal.name} —
-      </p>
-      <h1 className="max-w-3xl text-4xl font-semibold tracking-tight text-balance text-foreground sm:text-5xl md:text-6xl">
-        {personal.title}
-      </h1>
-      <p className="max-w-2xl text-lg leading-relaxed text-muted-foreground">
-        {bioSummary}
-      </p>
-      <div className="flex flex-col gap-3 sm:flex-row">
-        <Button
-          size="lg"
-          className="h-11 px-6"
-          render={
-            <a href="#projects">
-              View my work
-              <ArrowRight aria-hidden="true" />
-            </a>
-          }
-        />
-        <Button
-          size="lg"
-          variant="outline"
-          className="h-11 px-6"
-          render={<a href="#contact">Get in touch</a>}
-        />
+    <div>
+      <h3 className="text-sm font-semibold tracking-wide text-foreground uppercase">
+        What I do
+      </h3>
+      <div className="mt-4 grid gap-4 sm:grid-cols-2">
+        {services.map((service: Service) => {
+          const Icon = serviceIcons[service.title];
+          return (
+            <Card key={service.title} className="gap-2 py-5">
+              <CardHeader className="flex flex-row items-center gap-3 px-5">
+                {Icon && (
+                  <IconBox>
+                    <Icon color="currentColor" size="20px" />
+                  </IconBox>
+                )}
+                <h4 className="text-base leading-none font-semibold text-foreground">
+                  {service.title}
+                </h4>
+              </CardHeader>
+              <CardContent className="px-5">
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  {service.description}
+                </p>
+              </CardContent>
+            </Card>
+          );
+        })}
       </div>
-    </section>
+    </div>
   );
 }

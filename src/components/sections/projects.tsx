@@ -1,28 +1,30 @@
 import { ProjectCard } from "@/components/project-card";
+import { SectionHeading } from "@/components/section-heading";
 import { projects } from "@/content/site-content";
 
+// Portfolio tab panel.
+//
+// NOTE for content-writer: the reference vCard template's portfolio section
+// has an "All / Web design / Applications / Web development" category
+// filter bar (filter-list / filter-select-box in its markup). Our `Project`
+// type in site-content.ts has no category/tag field, so that filter UI is
+// intentionally NOT implemented here — fabricating filter categories isn't
+// this agent's call. If real project categories get added to `Project`,
+// wire a filter bar here matching the reference's filter-list pattern.
 export function Projects() {
   return (
-    <section
-      id="projects"
-      aria-labelledby="projects-heading"
-      className="mx-auto max-w-5xl scroll-mt-16 px-6 py-20"
-    >
-      <h2
-        id="projects-heading"
-        className="font-mono text-sm font-semibold tracking-wide text-primary uppercase"
-      >
-        Projects
-      </h2>
-      <p className="mt-3 max-w-2xl text-2xl font-medium text-balance text-foreground">
+    <div>
+      <SectionHeading>Portfolio</SectionHeading>
+
+      <p className="mt-4 max-w-2xl text-base text-muted-foreground">
         A few things I&apos;ve designed, built, and shipped end-to-end.
       </p>
 
-      <div className="mt-10 grid gap-6 md:grid-cols-2">
+      <div className="mt-8 grid gap-6 md:grid-cols-2">
         {projects.map((project) => (
           <ProjectCard key={project.slug} project={project} />
         ))}
       </div>
-    </section>
+    </div>
   );
 }

@@ -5,12 +5,14 @@ import { Tabs, TabsList, TabsPanel, TabsTab } from "@/components/ui/tabs";
 import { About } from "@/components/sections/about";
 import { Resume } from "@/components/sections/resume";
 import { Projects } from "@/components/sections/projects";
+import { Activities } from "@/components/sections/activities";
 import { Contact } from "@/components/sections/contact";
 
 const sections = [
   { value: "about", label: "About", Panel: About },
   { value: "resume", label: "Resume", Panel: Resume },
-  { value: "portfolio", label: "Portfolio", Panel: Projects },
+  { value: "project", label: "Project", Panel: Projects },
+  { value: "activities", label: "Activities", Panel: Activities },
   { value: "contact", label: "Contact", Panel: Contact },
 ] as const;
 
@@ -24,7 +26,7 @@ function isSectionValue(value: string): value is SectionValue {
 
 /**
  * Section-tab navigation for the main content area: About / Resume /
- * Portfolio / Contact, shown one at a time instead of stacked in a long
+ * Project / Contact, shown one at a time instead of stacked in a long
  * scroll. The active tab is kept in sync with the URL hash for
  * deep-linking, without a full page navigation.
  */
@@ -48,13 +50,15 @@ export function SectionTabs() {
 
   return (
     <Tabs value={value} onValueChange={handleValueChange}>
-      <TabsList aria-label="Portfolio sections">
-        {sections.map((section) => (
-          <TabsTab key={section.value} value={section.value}>
-            {section.label}
-          </TabsTab>
-        ))}
-      </TabsList>
+      <div className="sticky top-16 z-30 bg-background/95 py-3 backdrop-blur supports-[backdrop-filter]:bg-background/80 lg:top-0">
+        <TabsList aria-label="Site sections">
+          {sections.map((section) => (
+            <TabsTab key={section.value} value={section.value}>
+              {section.label}
+            </TabsTab>
+          ))}
+        </TabsList>
+      </div>
 
       {sections.map(({ value: sectionValue, Panel }) => (
         <TabsPanel key={sectionValue} value={sectionValue} keepMounted>

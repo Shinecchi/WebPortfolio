@@ -22,6 +22,13 @@ export interface SkillCategory {
   items: string[];
 }
 
+export type ProficiencyLevel = "intermediate" | "proficient" | "advanced";
+
+export interface CoreSkill {
+  name: string;
+  level: ProficiencyLevel;
+}
+
 export interface Service {
   title: string;
   description: string;
@@ -34,6 +41,17 @@ export interface TimelineEntry {
   description: string;
 }
 
+export interface ActivityEntry {
+  year: string;
+  title: string;
+  role: string;
+  description: string;
+  /** Poster/cover image path. Omit to fall back to a generated placeholder. */
+  poster?: string;
+  /** Photos from the event, shown in the expanded gallery. Omit or leave empty until real photos exist. */
+  gallery?: string[];
+}
+
 export interface Project {
   slug: string;
   name: string;
@@ -43,139 +61,257 @@ export interface Project {
   role: string;
   techStack: string[];
   outcome: string;
+  githubUrl: string;
+  /** Cover image path. Omit to fall back to a generated placeholder. */
+  poster?: string;
+  /** Screenshots shown in the expanded gallery. Omit or leave empty until real photos exist. */
+  gallery?: string[];
+  /** YouTube URL for a demo video. Omit to skip the video section entirely. */
+  videoUrl?: string;
 }
 
 export const personal: Personal = {
-  name: "Zulhaziq Noramin",
+  name: "Muhammad Zulhaziq Noramin",
   title: "The Goat",
-  role: "Full-Stack Software Engineer",
+  role: "Computer Science Student — ML & Data Analytics",
   email: "zulhaziqnoramin@gmail.com",
-  phone: "[CONTENT NEEDED: phone number, or omit this field from the UI if you'd rather not list one]",
-  location: "[CONTENT NEEDED: city, country]",
+  phone: "+60 11-2640 0207",
+  location: "Bayan Lepas, Pulau Pinang, Malaysia",
   githubUrl: "https://github.com/Shinecchi",
   linkedinUrl: "https://www.linkedin.com/in/muhdzulhaziq/",
   avatarImage: "/placeholder-avatar.svg",
 };
 
-export const aboutMe: string = `I'm a software engineer who likes building things that quietly make people's lives easier — whether that's a tool that catches a typo before it costs someone money, or a system that gets someone home safe. I care about the details most users never see: the error state that doesn't happen, the load time that isn't noticed, the edge case that's already handled. Most of my work sits at the intersection of frontend polish and backend reliability, and I'm happiest when I'm shipping something end-to-end. Outside of code, I'm the person who reads the changelog before the release notes get summarized for me.`;
+export const aboutMe: string = `I'm a Computer Science student (3.64 CGPA, Dean's List 2023-2025) who spends most of my time in the space between machine learning and data analytics — training models, wrangling messy datasets into something a pipeline can trust, and turning the output into dashboards someone actually reads. I care about the parts most people skip past: whether a model's mistakes are the safe kind, whether a dataset was sourced honestly, whether the preprocessing steps are documented well enough that someone else (often future me) can reproduce them. Outside of coursework, I've spent a fair number of weekends in hackathons building things end-to-end under a ticking clock.`;
 
-export const bioSummary: string = `I work across the stack, with a leaning toward TypeScript-based frontends and pragmatic, well-tested backends. I've built products from a blank repo to production, and I've also stepped into existing codebases to fix what's slowing a team down. I'm comfortable owning a feature from design through deployment, and I default to writing code that the next person — often future me — won't resent.`;
+export const bioSummary: string = `I specialize in machine learning, data science, and analytics — from designing and deploying deep learning and agentic AI systems, to building end-to-end data pipelines, to putting together BI dashboards that support real decision-making. I'm comfortable owning a project from raw data through a trained model to a stakeholder-facing report, and I default to documenting preprocessing and evaluation decisions clearly enough that the results hold up to scrutiny.`;
 
 export const skills: SkillCategory[] = [
   {
-    category: "Languages",
-    items: ["TypeScript", "JavaScript", "Python", "SQL", "HTML/CSS"],
+    category: "Programming Languages",
+    items: ["Python", "SQL", "JavaScript", "PHP", "Java", "C++", "MATLAB"],
   },
   {
-    category: "Frontend",
-    items: ["React", "Next.js", "Tailwind CSS", "shadcn/ui", "Redux"],
+    category: "Web Technologies",
+    items: ["HTML", "CSS"],
   },
   {
-    category: "Backend",
-    items: ["Node.js", "Express", "PostgreSQL", "REST APIs", "GraphQL"],
-  },
-  {
-    category: "Tools & Practices",
+    category: "Frameworks & Libraries",
     items: [
-      "Git/GitHub",
-      "Docker",
-      "CI/CD (GitHub Actions)",
-      "Jest / Testing Library",
-      "Figma",
+      "TensorFlow",
+      "Keras",
+      "Scikit-learn",
+      "OpenCV",
+      "YOLOv8",
+      "Pandas",
+      "Matplotlib",
+      "NLTK",
+      "Transformers (HuggingFace)",
+      "Prophet",
     ],
   },
+  {
+    category: "Tools & Software",
+    items: [
+      "RapidMiner",
+      "Tableau",
+      "Power BI",
+      "Excel (Macro/VBA)",
+      "MySQL",
+      "PostgreSQL",
+      "MongoDB",
+      "Supabase",
+      "Oracle APEX",
+      "Figma",
+      "Git/GitHub",
+    ],
+  },
+  {
+    category: "Spoken Languages",
+    items: ["Malay (Native)", "English (Proficient)"],
+  },
+];
+
+// Draft proficiency self-assessment inferred from the projects/coursework
+// above (e.g. "advanced" where a full project was shipped with it) — please
+// confirm or adjust these before treating them as final, same as the other
+// placeholder content in this file.
+export const coreSkills: CoreSkill[] = [
+  { name: "Python", level: "advanced" },
+  { name: "SQL", level: "proficient" },
+  { name: "TensorFlow / Keras", level: "advanced" },
+  { name: "Power BI", level: "proficient" },
+  { name: "Tableau", level: "intermediate" },
+  { name: "JavaScript", level: "intermediate" },
 ];
 
 export const services: Service[] = [
   {
-    title: "Full-Stack Development",
+    title: "Machine Learning & AI",
     description:
-      "Taking a product from a blank repo to something live — data model, API, UI, and the deployment pipeline that ships it.",
+      "Building end-to-end ML pipelines from raw data through model training, evaluation, and iteration — including deep learning models for computer vision and behavioral biometrics.",
   },
   {
-    title: "Frontend Engineering",
+    title: "Data Analytics & Visualization",
     description:
-      "Building interfaces in React/Next.js that feel fast and hold up under real usage, not just in the happy-path demo.",
+      "Cleaning and analyzing large datasets using Python and SQL, and translating findings into interactive Power BI and Tableau dashboards that support real business decisions.",
   },
   {
-    title: "Backend & APIs",
+    title: "Agentic AI & Automation",
     description:
-      "Designing pragmatic, well-tested services and data layers that stay boring and predictable as the product grows.",
+      "Designing and building multi-agent AI systems that integrate live APIs and automate end-to-end workflows — turning manual, multi-step processes into autonomous pipelines.",
   },
   {
-    title: "Codebase Triage",
+    title: "NLP & Transformer Models",
     description:
-      "Stepping into an existing project to find what's actually slowing a team down and fixing it without a rewrite.",
+      "Applying transformer-based models like DistilBERT for large-scale text classification and sentiment analysis, with hands-on experience building preprocessing pipelines for unstructured data.",
   },
 ];
 
-// Resume-style timeline data. No real employment or education history has
-// been provided yet — these are placeholders per this project's placeholder
-// convention and should be replaced with real details before shipping the
-// resume/timeline section.
 export const experience: TimelineEntry[] = [
   {
-    title: "[CONTENT NEEDED: job title]",
-    organization: "[CONTENT NEEDED: company name]",
-    period: "[CONTENT NEEDED: start date — end date]",
+    title: "Kumon Instructor — Mathematics",
+    organization: "Kumon Education Centre",
+    period: "Jun 2024 — Sep 2024",
     description:
-      "[CONTENT NEEDED: 1-2 sentences on responsibilities and impact in this role]",
+      "Communicated with students and parents to manage classroom activities and maintain a productive learning environment, and tracked student progress data to identify learning gaps and adjust teaching plans accordingly.",
   },
 ];
 
 export const education: TimelineEntry[] = [
   {
-    title: "[CONTENT NEEDED: degree/program name]",
-    organization: "[CONTENT NEEDED: school/institution name]",
-    period: "[CONTENT NEEDED: start date — end date]",
+    title: "Bachelor in Computer Science",
+    organization: "Universiti Teknologi MARA, Cawangan Tapah",
+    period: "Sep 2023 — Present",
     description:
-      "[CONTENT NEEDED: 1-2 sentences on focus area, honors, or relevant coursework]",
+      "CGPA 3.64, Dean's List 2023-2025. Relevant coursework: Software Engineering, Operating Systems, Artificial Intelligence, Database Engineering, Data Structures, Business and Data Analytics.",
+  },
+  {
+    title: "Physical Module (Matriculation)",
+    organization: "Kolej Matrikulasi Pulau Pinang",
+    period: "Jul 2022 — May 2023",
+    description:
+      "CGPA 3.71, MUET Band 4.0. Group Leader for a peer-teaching program in Mathematics and Physics.",
+  },
+  {
+    title: "Secondary Education",
+    organization: "SMK Bukit Jambul",
+    period: "Jan 2020 — Mar 2022",
+    description:
+      "2nd runner-up, National KenKen Puzzle Championship 2021. Participated in the STEM Creating Video Competition 2020.",
   },
 ];
 
-export const projects: Project[] = [
+// Reverse-chronological in the resume; stored oldest-first here so the
+// Activities timeline (rendered bottom-to-top) reads chronologically from
+// bottom to top without an extra sort step in the component.
+export const activities: ActivityEntry[] = [
   {
-    slug: "biotype",
-    name: "BioType",
-    tagline: "Typing-pattern authentication that quietly confirms you're you.",
+    year: "2024",
+    title: "Hack Blast 2024",
+    role: "Participant",
     description:
-      "BioType is a lightweight authentication layer that uses keystroke dynamics — the rhythm, timing, and pressure patterns unique to how someone types — as a continuous, passive second factor. Instead of asking users to prove their identity once at login, it verifies them in the background as they work, flagging sessions where typing behavior suddenly doesn't match the enrolled profile.",
-    problem:
-      "Traditional MFA (SMS codes, authenticator apps) only checks identity at the front door. Once a session is live, there's no ongoing signal that the person at the keyboard is still the account owner — which matters for shared devices, session hijacking, and account takeover after credential theft. BioType addresses that gap without adding friction for the legitimate user.",
-    role:
-      "I designed and built the core keystroke-capture SDK and the scoring pipeline that turns raw timing data into a confidence score, and led the integration work that plugged BioType into a demo web app as a drop-in middleware layer.",
-    techStack: [
-      "React",
-      "TypeScript",
-      "Node.js",
-      "Express",
-      "PostgreSQL",
-      "WebSockets",
-      "Python (model training)",
-    ],
-    outcome:
-      "The prototype reached 94% classification accuracy on held-out typing samples after a short enrollment period (roughly 150 keystrokes), with false-positive session flags low enough to stay out of users' way during normal use. It's a proof of concept, not a shipped security product, but it demonstrated that behavioral biometrics can be a viable, unobtrusive layer on top of standard auth.",
+      "Designed and implemented a relational database schema for a car rental management system, handling data modelling and query logic under hackathon time constraints.",
   },
   {
-    slug: "rideshield",
-    name: "RideShield",
-    tagline: "A safety layer for rideshare trips, built around real-time trust signals.",
+    year: "2025",
+    title: "Prosolve National 2025",
+    role: "Participant",
     description:
-      "RideShield is a companion app concept for rideshare passengers that adds a real-time safety layer on top of existing platforms like Uber or Lyft. It verifies the vehicle and driver against the trip details at pickup, monitors the route for unexpected deviations, and gives riders a fast, low-friction way to alert a trusted contact or emergency services if something feels wrong.",
+      "Competed in a national-level competitive programming competition, solving algorithms and technical coding challenges under time constraints.",
+  },
+  {
+    year: "2026",
+    title: "Autopilot Asia Hackathon 2026",
+    role: "Participant",
+    description:
+      "Designed and built a multi-agent AI system (1 Orchestrator + 5 specialized Operator Agents) to automate lead qualification and outreach, reducing lead response time from days to seconds. Integrated 4 live systems (Supabase, HubSpot CRM, Slack, Microsoft Outlook) covering visitor identification, CRM enrichment, intent scoring, automated email outreach, and human-in-the-loop escalation.",
+  },
+];
+
+// GitHub links below point at this profile as a placeholder — swap each
+// `githubUrl` for the project's actual repo once it's public.
+export const projects: Project[] = [
+  {
+    slug: "youtube-sentiment-analytics",
+    name: "YouTube Audience Sentiment & Engagement Analytics",
+    tagline: "What 5,000+ YouTube comments actually say about a video's audience.",
+    description:
+      "An NLP analytics project that scrapes and processes YouTube comments across a large sample of videos, then applies transformer-based sentiment labelling and engineered engagement features to quantify how an audience is really responding to content.",
     problem:
-      "Rideshare safety incidents often trace back to a simple failure: the passenger couldn't quickly confirm they were getting into the right car, or couldn't act fast enough when a trip went off-script. Built-in platform safety features exist but are often buried, slow, or an afterthought. RideShield's goal was to make trip verification and emergency response the fastest, most obvious actions in the app.",
+      "View counts and likes don't say much about how an audience actually feels about a video, and comment sections are too large and unstructured to read manually. The project needed a pipeline that could turn thousands of raw, noisy comments into a reliable, unbiased signal of sentiment and engagement.",
     role:
-      "I was the sole developer on the mobile-first web app, building the license-plate/vehicle verification flow, the live route-deviation monitoring using geolocation polling, and the one-tap alert system that texts a trusted contact with live location.",
+      "Data Scientist, in a team of 4-5. Scraped and processed 5,046 comments across 101 videos via the YouTube Data API using random sampling to eliminate recency bias, built the end-to-end NLP preprocessing pipeline, and helped build and compare predictive models in RapidMiner.",
     techStack: [
-      "React Native (Expo)",
-      "TypeScript",
-      "Node.js",
-      "Express",
-      "PostgreSQL",
-      "Mapbox API",
-      "Twilio (SMS alerts)",
+      "Python",
+      "YouTube Data API",
+      "DistilBERT (Transformers)",
+      "RapidMiner",
+      "Logistic Regression / Naive Bayes / SVR / Random Forest",
     ],
     outcome:
-      "Delivered a working end-to-end demo covering trip entry, live map tracking, route-deviation detection (flagging routes that diverged more than 0.5 miles from the expected path), and a one-tap emergency alert that fired an SMS with live coordinates in under two seconds. Used as a portfolio case study for product thinking around safety UX, not deployed to production riders.",
+      "Applied a DistilBERT transformer for automated sentiment labelling, reaching 96.2% mean confidence across 3,849 training samples, and engineered 12 analytical features including a weighted engagement score to quantify content performance.",
+    githubUrl: "https://github.com/Shinecchi",
+  },
+  {
+    slug: "retail-sales-forecasting",
+    name: "Retail Sales Performance Analysis & Forecasting",
+    tagline: "Turning 9,994 rows of retail transactions into a stakeholder-ready dashboard.",
+    description:
+      "A solo data analytics project that cleans and explores a retail sales dataset to surface the real drivers of sales and profit, then packages the findings into an interactive, stakeholder-facing dashboard.",
+    problem:
+      "Raw retail transaction data doesn't tell a business where it's winning or losing money on its own — someone has to clean it, ask the right questions of it, and present the answers in a way a non-technical stakeholder can act on.",
+    role:
+      "Solo. Cleaned and analyzed the dataset with Python and Pandas, ran exploratory analysis through groupby aggregation and Matplotlib visualizations, and designed the final Power BI dashboard.",
+    techStack: ["Python", "Pandas", "Matplotlib", "Power BI"],
+    outcome:
+      "Identified key sales and profit drivers across regions, categories, and sub-categories, and delivered an interactive Power BI dashboard combining KPI cards, a choropleth map of sales by state, and category-level profit breakdowns.",
+    githubUrl: "https://github.com/Shinecchi",
+  },
+  {
+    slug: "biotype",
+    name: "BioType — Behavioral Biometrics Authentication",
+    tagline: "Verifying identity from how someone types, not just what they type.",
+    description:
+      "BioType is a behavioral biometrics authentication system that uses a Siamese Neural Network to verify identity from keystroke dynamics — the rhythm and timing patterns unique to how a person types — rather than a single one-time credential.",
+    problem:
+      "Traditional authentication only checks identity once, at login. There's no continuous signal that the person at the keyboard is still the account owner, and building a model that's actually accurate enough to rely on requires sourcing and processing large-scale behavioral data, which is harder to get right than it sounds.",
+    role:
+      "Lead Developer. Designed and implemented a Siamese Neural Network with triplet loss for the authentication model, and built the full ML pipeline in Python covering data extraction from raw keystroke sources, image transformation, model training, and evaluation.",
+    techStack: ["Python", "TensorFlow", "Keras", "Matplotlib"],
+    outcome:
+      "Reduced Equal Error Rate from ~40% to ~20% through iterative model improvement, sourced and processed large-scale training data from the Aalto University Desktop Dataset despite access challenges across multiple academic dataset sources, and documented the preprocessing and evaluation methodology for reproducibility.",
+    githubUrl: "https://github.com/Shinecchi",
+  },
+  {
+    slug: "baldness-detection",
+    name: "Baldness Detection System",
+    tagline: "A web-based diagnostic tool that classifies scalp condition severity from images.",
+    description:
+      "A web-based diagnostic tool that uses a computer vision object detection model to classify scalp conditions into severity levels, aimed at real-time diagnostic use.",
+    problem:
+      "Assessing scalp/hair-loss severity consistently usually requires a specialist's eye. The project explores whether an object detection model, trained on curated and annotated image data, can classify severity levels reliably enough to support a real-time diagnostic tool.",
+    role:
+      "ML Engineer. Trained and optimized a YOLOv8 medium object detection model, and managed the complete ML pipeline including dataset curation, annotation, preprocessing with OpenCV, model training, and validation.",
+    techStack: ["Python", "YOLOv8", "OpenCV"],
+    outcome:
+      "Classified scalp conditions into three severity levels (Good, Mild, Severe) for real-time diagnostic use, and documented preprocessing decisions and validation outcomes to ensure transparency, accuracy, and reproducibility of results.",
+    githubUrl: "https://github.com/Shinecchi",
+  },
+  {
+    slug: "adsurevent",
+    name: "AdsUrEvent",
+    tagline: "The frontend for a university event management web application.",
+    description:
+      "AdsUrEvent is an event management web application covering event browsing, payment, and part-timer recruitment, built with a cross-functional university team.",
+    problem:
+      "Coordinating event browsing, ticket payment, and part-time staff recruitment into one coherent web app required aligning layouts and user flow across several distinct feature areas and a team with mixed design opinions.",
+    role:
+      "UI Designer. Collaborated with a cross-functional team to design and implement the full frontend, coordinating on layouts and user flow, and communicated regularly with teammates to align on design decisions and resolve conflicting priorities.",
+    techStack: ["HTML", "CSS", "JavaScript", "Figma"],
+    outcome:
+      "Shipped a complete frontend covering event browsing, payment, and part-timer recruitment flows as part of a university team project.",
+    githubUrl: "https://github.com/Shinecchi",
+    videoUrl: "https://youtu.be/UP1bq6ANMF0",
   },
 ];

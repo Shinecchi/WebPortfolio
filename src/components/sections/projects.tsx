@@ -1,8 +1,8 @@
-import { ProjectCard } from "@/components/project-card";
+import { ProjectTimeline } from "@/components/project-timeline";
 import { SectionHeading } from "@/components/section-heading";
 import { projects } from "@/content/site-content";
 
-// Portfolio tab panel.
+// Project tab panel.
 //
 // NOTE for content-writer: the reference vCard template's portfolio section
 // has an "All / Web design / Applications / Web development" category
@@ -14,16 +14,14 @@ import { projects } from "@/content/site-content";
 export function Projects() {
   return (
     <div>
-      <SectionHeading>Portfolio</SectionHeading>
+      <SectionHeading>Projects</SectionHeading>
 
       <p className="mt-4 max-w-2xl text-base text-muted-foreground">
         A few things I&apos;ve designed, built, and shipped end-to-end.
       </p>
 
-      <div className="mt-8 grid gap-6 md:grid-cols-2">
-        {projects.map((project) => (
-          <ProjectCard key={project.slug} project={project} />
-        ))}
+      <div className="mt-8">
+        <ProjectTimeline projects={projects} />
       </div>
     </div>
   );

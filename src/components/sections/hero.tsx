@@ -1,8 +1,8 @@
 import {
-  IoCodeSlashOutline,
-  IoDesktopOutline,
-  IoServerOutline,
-  IoBugOutline,
+  IoHardwareChipOutline,
+  IoBarChartOutline,
+  IoGitNetworkOutline,
+  IoChatbubblesOutline,
 } from "react-icons/io5";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { IconBox } from "@/components/icon-box";
@@ -13,10 +13,10 @@ import { services, type Service } from "@/content/site-content";
 // we use an icon component instead, consistent with the rest of the site's
 // react-icons/io5 usage).
 const serviceIcons: Record<string, React.ComponentType<{ color?: string; size?: string }>> = {
-  "Full-Stack Development": IoCodeSlashOutline,
-  "Frontend Engineering": IoDesktopOutline,
-  "Backend & APIs": IoServerOutline,
-  "Codebase Triage": IoBugOutline,
+  "Machine Learning & AI": IoHardwareChipOutline,
+  "Data Analytics & Visualization": IoBarChartOutline,
+  "Agentic AI & Automation": IoGitNetworkOutline,
+  "NLP & Transformer Models": IoChatbubblesOutline,
 };
 
 // "What I do" service blurbs - shown on the About tab. File kept at its

@@ -118,7 +118,7 @@ function ProfileInfo() {
       <ProfileAvatar />
       <div>
         <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          {personal.name}
+          Zulhaziq Noramin
         </h1>
         <p className="mt-1 font-mono text-sm text-primary">{personal.role}</p>
       </div>

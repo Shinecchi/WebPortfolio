@@ -4,6 +4,7 @@ import { useId, useRef, useState } from "react";
 import Image from "next/image";
 import { IoChevronDownOutline, IoImagesOutline, IoTrophyOutline } from "react-icons/io5";
 import { gradientAngleFor } from "@/lib/gradient-angle";
+import { GalleryGrid } from "@/components/gallery-grid";
 import { cn } from "@/lib/utils";
 import { usePanelHideSignal, useRevealOnScroll } from "@/hooks/use-scroll-reveal";
 import type { ActivityEntry } from "@/content/site-content";
@@ -17,6 +18,7 @@ function ActivityPoster({ entry }: { entry: ActivityEntry }) {
           alt={`${entry.title} poster`}
           fill
           className="object-cover"
+          style={{ objectPosition: entry.posterPosition ?? "center" }}
         />
       </div>
     );
@@ -107,13 +109,7 @@ function ActivityCard({
               Gallery
             </h5>
             {gallery.length > 0 ? (
-              <div className="mt-2 grid grid-cols-3 gap-2">
-                {gallery.map((src) => (
-                  <div key={src} className="relative aspect-square overflow-hidden rounded-md">
-                    <Image src={src} alt="" fill className="object-cover" />
-                  </div>
-                ))}
-              </div>
+              <GalleryGrid images={gallery} />
             ) : (
               <p className="mt-1.5 text-sm text-muted-foreground italic">
                 Photos from this event haven&apos;t been added yet.

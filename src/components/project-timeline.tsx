@@ -13,6 +13,7 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { gradientAngleFor } from "@/lib/gradient-angle";
 import { getYouTubeId } from "@/lib/youtube";
+import { GalleryGrid } from "@/components/gallery-grid";
 import { cn } from "@/lib/utils";
 import { usePanelHideSignal, useRevealOnScroll } from "@/hooks/use-scroll-reveal";
 import type { Project } from "@/content/site-content";
@@ -207,13 +208,7 @@ function ProjectCard({ project }: { project: Project }) {
             Gallery
           </h5>
           {gallery.length > 0 ? (
-            <div className="mt-2 grid grid-cols-3 gap-2">
-              {gallery.map((src) => (
-                <div key={src} className="relative aspect-square overflow-hidden rounded-md">
-                  <Image src={src} alt="" fill className="object-cover" />
-                </div>
-              ))}
-            </div>
+            <GalleryGrid images={gallery} />
           ) : (
             <p className="mt-1.5 text-sm text-muted-foreground italic">
               Photos from this project haven&apos;t been added yet.

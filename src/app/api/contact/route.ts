@@ -166,7 +166,7 @@ function getClientKey(request: NextRequest): string {
 async function sendViaResend(data: ContactPayload): Promise<void> {
   const apiKey = process.env.RESEND_API_KEY;
   const toEmail = process.env.CONTACT_TO_EMAIL;
-  const fromEmail = process.env.CONTACT_FROM_EMAIL ?? "Portfolio Contact Form <onboarding@resend.dev>";
+  const fromEmail = process.env.CONTACT_FROM_EMAIL || "Portfolio Contact Form <onboarding@resend.dev>";
 
   if (!apiKey || !toEmail) {
     // Dev fallback: no provider configured. Log so the submission isn't

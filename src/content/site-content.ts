@@ -48,6 +48,8 @@ export interface ActivityEntry {
   description: string;
   /** Poster/cover image path. Omit to fall back to a generated placeholder. */
   poster?: string;
+  /** CSS object-position for the poster crop. Omit to default to "center". */
+  posterPosition?: string;
   /** Photos from the event, shown in the expanded gallery. Omit or leave empty until real photos exist. */
   gallery?: string[];
 }
@@ -73,13 +75,13 @@ export interface Project {
 export const personal: Personal = {
   name: "Muhammad Zulhaziq Noramin",
   title: "The Goat",
-  role: "Computer Science Student — ML & Data Analytics",
+  role: "BCompSc (Hons.) | Universiti Teknologi MARA | AI-First Engineering Intern @ Xsolla",
   email: "zulhaziqnoramin@gmail.com",
   phone: "+60 11-2640 0207",
   location: "Bayan Lepas, Pulau Pinang, Malaysia",
   githubUrl: "https://github.com/Shinecchi",
   linkedinUrl: "https://www.linkedin.com/in/muhdzulhaziq/",
-  avatarImage: "/placeholder-avatar.svg",
+  avatarImage: "/galleries/About/Haziq-Profile-Picture.jpg",
 };
 
 export const aboutMe: string = `I'm a Computer Science student (3.64 CGPA, Dean's List 2023-2025) who spends most of my time in the space between machine learning and data analytics — training models, wrangling messy datasets into something a pipeline can trust, and turning the output into dashboards someone actually reads. I care about the parts most people skip past: whether a model's mistakes are the safe kind, whether a dataset was sourced honestly, whether the preprocessing steps are documented well enough that someone else (often future me) can reproduce them. Outside of coursework, I've spent a fair number of weekends in hackathons building things end-to-end under a ticking clock.`;
@@ -212,6 +214,8 @@ export const activities: ActivityEntry[] = [
     role: "Participant",
     description:
       "Designed and implemented a relational database schema for a car rental management system, handling data modelling and query logic under hackathon time constraints.",
+    poster: "/galleries/Activities/Hack Blast 2024/Devcon-Main.jpg",
+    posterPosition: "top",
   },
   {
     year: "2025",
@@ -219,13 +223,40 @@ export const activities: ActivityEntry[] = [
     role: "Participant",
     description:
       "Competed in a national-level competitive programming competition, solving algorithms and technical coding challenges under time constraints.",
+    poster: "/galleries/Activities/Prosolve National 2025/Prosolve-Main.jpg",
+    posterPosition: "top",
+  },
+  {
+    year: "2026",
+    title: "Qwen Brainrot Hackathon 2026",
+    role: "Finalist",
+    description:
+      "Built an intentionally useless AI cat wingman for a build-something-useless competition: users upload a screenshot of their relationship conversation for context and a voice clip of their cat, and the model fuses the conversational context with the cat's inferred emotion to generate the cat's in-character relationship advice.",
+    poster: "/galleries/Activities/Qwen Brainrot Hackathon/Qwen-Main.jpg",
+    gallery: [
+      "/galleries/Activities/Qwen Brainrot Hackathon/Qwen-1.jpg",
+      "/galleries/Activities/Qwen Brainrot Hackathon/Qwen-2.jpg",
+      "/galleries/Activities/Qwen Brainrot Hackathon/Qwen-3.jpg",
+      "/galleries/Activities/Qwen Brainrot Hackathon/Qwen-4.jpg",
+      "/galleries/Activities/Qwen Brainrot Hackathon/Qwen-5.jpg",
+      "/galleries/Activities/Qwen Brainrot Hackathon/Qwen-6.jpg",
+      "/galleries/Activities/Qwen Brainrot Hackathon/Qwen-7.jpg",
+    ],
   },
   {
     year: "2026",
     title: "Autopilot Asia Hackathon 2026",
-    role: "Participant",
+    role: "Finalist - Sales Intelligence Track",
     description:
       "Designed and built a multi-agent AI system (1 Orchestrator + 5 specialized Operator Agents) to automate lead qualification and outreach, reducing lead response time from days to seconds. Integrated 4 live systems (Supabase, HubSpot CRM, Slack, Microsoft Outlook) covering visitor identification, CRM enrichment, intent scoring, automated email outreach, and human-in-the-loop escalation.",
+    poster: "/galleries/Activities/Autopilot Hackathon/Supervity-Main.jpg",
+    posterPosition: "top",
+    gallery: [
+      "/galleries/Activities/Autopilot Hackathon/Supervity-1.jpg",
+      "/galleries/Activities/Autopilot Hackathon/Supervity-2.jpg",
+      "/galleries/Activities/Autopilot Hackathon/Supervity-3.jpg",
+      "/galleries/Activities/Autopilot Hackathon/Supervity-4.jpg",
+    ],
   },
 ];
 
@@ -252,6 +283,18 @@ export const projects: Project[] = [
     outcome:
       "Applied a DistilBERT transformer for automated sentiment labelling, reaching 96.2% mean confidence across 3,849 training samples, and engineered 12 analytical features including a weighted engagement score to quantify content performance.",
     githubUrl: "https://github.com/Shinecchi",
+    poster: "/galleries/Project/YouTube Audience Sentiment/ISP610-Main.png",
+    gallery: [
+      "/galleries/Project/YouTube Audience Sentiment/ISP610-1.png",
+      "/galleries/Project/YouTube Audience Sentiment/ISP610-2.png",
+      "/galleries/Project/YouTube Audience Sentiment/ISP610-3.png",
+      "/galleries/Project/YouTube Audience Sentiment/ISP610-4.png",
+      "/galleries/Project/YouTube Audience Sentiment/ISP610-5.png",
+      "/galleries/Project/YouTube Audience Sentiment/ISP610-6.png",
+      "/galleries/Project/YouTube Audience Sentiment/ISP610-7.png",
+      "/galleries/Project/YouTube Audience Sentiment/ISP610-8.png",
+      "/galleries/Project/YouTube Audience Sentiment/ISP610-9.png",
+    ],
   },
   {
     slug: "retail-sales-forecasting",
@@ -267,6 +310,12 @@ export const projects: Project[] = [
     outcome:
       "Identified key sales and profit drivers across regions, categories, and sub-categories, and delivered an interactive Power BI dashboard combining KPI cards, a choropleth map of sales by state, and category-level profit breakdowns.",
     githubUrl: "https://github.com/Shinecchi",
+    poster: "/galleries/Project/Retail Sales Performance/RSPA-Main.png",
+    gallery: [
+      "/galleries/Project/Retail Sales Performance/RSPA-1.png",
+      "/galleries/Project/Retail Sales Performance/RSPA-2.png",
+      "/galleries/Project/Retail Sales Performance/RSPA-3.png",
+    ],
   },
   {
     slug: "biotype",
@@ -282,6 +331,13 @@ export const projects: Project[] = [
     outcome:
       "Reduced Equal Error Rate from ~40% to ~20% through iterative model improvement, sourced and processed large-scale training data from the Aalto University Desktop Dataset despite access challenges across multiple academic dataset sources, and documented the preprocessing and evaluation methodology for reproducibility.",
     githubUrl: "https://github.com/Shinecchi",
+    poster: "/galleries/Project/BioType/BioType-Main.png",
+    gallery: [
+      "/galleries/Project/BioType/BioType-1.png",
+      "/galleries/Project/BioType/BioType-2.png",
+      "/galleries/Project/BioType/BioType-3.png",
+      "/galleries/Project/BioType/BioType-4.png",
+    ],
   },
   {
     slug: "baldness-detection",
